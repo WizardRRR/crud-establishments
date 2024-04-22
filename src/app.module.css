@@ -1,0 +1,26 @@
+.body {
+  padding: 30px;
+  display: grid;
+  grid-template-rows: 150px 1fr 70px;
+  min-height: 100vh;
+  background: var(--color-white);
+}
+
+.header {
+  align-self: center;
+  text-align: center;
+  & h1 {
+    font-weight: var(--font-bold);
+    font-size: var(--text-2xl);
+  }
+}
+
+.main {
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+.footer {
+}
