@@ -1,13 +1,16 @@
 import PropTypes from 'prop-types'
 import styles from './field.module.css'
+import { forwardRef } from 'react'
 
-export default function Field({ label, type, value, onChange, error }) {
+
+const Field = forwardRef(function Field({ label, type, value, onChange, error }, ref) {
   return (
     <div className={styles.field}>
       <label htmlFor={label}>
         {label}
       </label>
       <input
+        ref={ref}
         type={type}
         value={value}
         onChange={onChange}
@@ -16,7 +19,7 @@ export default function Field({ label, type, value, onChange, error }) {
       {error && <p className={styles.error}>{error}</p>}
     </div>
   )
-}
+})
 
 Field.propTypes = {
   label: PropTypes.string.isRequired,
@@ -25,3 +28,5 @@ Field.propTypes = {
   onChange: PropTypes.func.isRequired,
   error: PropTypes.string
 }
+
+export default Field

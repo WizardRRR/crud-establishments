@@ -1,46 +1,114 @@
 import styles from './app.module.css'
+
 import { useState } from 'react'
-import { Form } from './components'
 import { toast } from 'sonner'
-import Establihsment from './components/Establishment/Establishment'
+
+import { Form, Establishment, Button } from './components'
+import validateFields from './form-establishment.validate'
+
+import useCrud from './use-crud.hook'
+
+const INITIAL_VALUES = {
+  name: '',
+  address: '',
+  city: ''
+}
 
 export default function App() {
 
-  const [establishments, setEstablishments] = useState([])
+  const {
+    addEstablishment,
+    deleteEstablishment,
+    updateEstablishment,
+    findEstablishment,
+    establishments
+  } = useCrud()
 
-  const addEstablishment = (establishment) => {
-    setEstablishments(prev => [...prev, establishment])
+  const [establishment, setEstablishment] = useState(INITIAL_VALUES)
+  const [errors, setErrors] = useState(INITIAL_VALUES)
+  const [modeForm, setModeForm] = useState('create')
+
+  const handleSubmit = (e, refName) => {
+    e.preventDefault()
+    const [isValid, errors] = validateFields(establishment)
+    if (!isValid) setErrors(errors)
+    else {
+      if (modeForm === 'create') handleSave(establishment)
+      if (modeForm === 'update') handleUpdate(establishment.uuid, establishment)
+      clearFields()
+      clearErrors()
+      refName?.current.focus()
+      setModeForm('create')
+    }
+  }
+
+  const handleSave = (establishment) => {
+    addEstablishment(establishment)
+    toast.success('Establecimiento guardado correctamente!')
+  }
+
+  const handleCancel = () => {
+    clearFields()
+    setModeForm('create')
+  }
+
+  const handleUpdate = (establishmentUuid, establishment) => {
+    updateEstablishment(establishmentUuid, establishment)
+    toast.success('Actualizado con exito!')
   }
 
   const handleDelete = (establishmentUuid) => {
-    setEstablishments(prev => {
-      const updateEstablishment = prev.filter(establishment => establishment.uuid !== establishmentUuid)
-      return updateEstablishment
-    })
+    deleteEstablishment(establishmentUuid)
     toast.error('Eliminado')
   }
 
-  const handleUpdate = (establishmentUuid) => {
-    console.log(establishmentUuid)
-    // TODO: Implementar la actualización de un establecimiento
+  // Reset Fields
+  const clearFields = () => setEstablishment(INITIAL_VALUES)
+  const clearErrors = () => setErrors(INITIAL_VALUES)
+
+  const onClickEdit = (uuid) => {
+    const establishment = findEstablishment(uuid)
+    setEstablishment(establishment)
+    setModeForm('update')
   }
 
   return (
     <div className={styles.body}>
       <header className={styles.header}>
-        <h1>Establicimientos</h1>
+        <h1>Establicimientos sdfsdfsdfsdfsd</h1>
         <p>Establecimientos registrados en lima</p>
       </header>
       <main className={styles.main}>
-        <Form onSubmit={addEstablishment} />
+        <div className={styles.containerForm}>
+          <h2>Nuevos establecimientos</h2>
+          <Form
+            establishment={establishment}
+            handleSubmit={handleSubmit}
+            errors={errors}
+            changeAddress={(e) => setEstablishment({ ...establishment, address: e.target.value })}
+            changeCity={(e) => setEstablishment({ ...establishment, city: e.target.value })}
+            changeName={(e) => setEstablishment({ ...establishment, name: e.target.value })}
+            componentButtons={
+              <>
+                <Button title={modeForm === 'create' ? 'Guardar' : 'Actualizar'} type='submit' />
+                <Button
+                  textColor='#000'
+                  backgroundColor='#fff'
+                  title='Cancelar'
+                  onClick={handleCancel}
+                />
+              </>
+            }
+          />
+        </div>
         <div>
           {establishments.length === 0 && <p>No hay establecimientos</p>}
           {establishments.map(establishment => (
-            <Establihsment
+            <Establishment
               key={establishment.uuid}
               establishment={establishment}
               handleDelete={handleDelete}
-              handleUpdate={handleUpdate}
+              onClickEdit={onClickEdit}
             />
           ))}
         </div>

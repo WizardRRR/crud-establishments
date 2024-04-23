@@ -12,7 +12,7 @@ export default function Buton({
   return (
     <button
       style={{ backgroundColor, color: textColor }}
-      className={styles.button}
+      className={`${styles.button} flex red`}
       type={type}
       onClick={onClick}
     >

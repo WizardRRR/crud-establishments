@@ -7,7 +7,7 @@ import { MdDeleteOutline, MdOutlineModeEdit } from 'react-icons/md'
 export default function Establihsment({
   establishment,
   handleDelete,
-  handleUpdate
+  onClickEdit
 }) {
 
   const { uuid, name, address, city } = establishment
@@ -20,7 +20,7 @@ export default function Establihsment({
       <Button onClick={() => handleDelete(uuid)} backgroundColor='red'>
         <MdDeleteOutline size={20} />
       </Button>
-      <Button onClick={() => handleUpdate(uuid)} backgroundColor='blue'>
+      <Button onClick={() => onClickEdit(uuid)} backgroundColor='blue'>
         <MdOutlineModeEdit size={20} />
       </Button>
     </div>
@@ -35,5 +35,5 @@ Establihsment.propTypes = {
     city: PropTypes.string.isRequired
   }).isRequired,
   handleDelete: PropTypes.func.isRequired,
-  handleUpdate: PropTypes.func.isRequired
+  onClickEdit: PropTypes.func.isRequired
 }
