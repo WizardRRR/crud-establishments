@@ -1,76 +1,76 @@
-import styles from './app.module.css'
+import styles from "./app.module.css";
 
-import { useState } from 'react'
-import { toast } from 'sonner'
+import { useState } from "react";
+import { toast } from "sonner";
 
-import { Form, Establishment, Button } from './components'
-import validateFields from './form-establishment.validate'
+import { Form, Establishment, Button } from "./components";
+import validateFields from "./form-establishment.validate";
 
-import useCrud from './use-crud.hook'
+import useCrud from "./hooks/use-crud.hook";
 
 const INITIAL_VALUES = {
-  name: '',
-  address: '',
-  city: ''
-}
+  name: "",
+  address: "",
+  city: "",
+};
 
 export default function App() {
-
   const {
     addEstablishment,
     deleteEstablishment,
     updateEstablishment,
     findEstablishment,
-    establishments
-  } = useCrud()
+    establishments,
+  } = useCrud();
 
-  const [establishment, setEstablishment] = useState(INITIAL_VALUES)
-  const [errors, setErrors] = useState(INITIAL_VALUES)
-  const [modeForm, setModeForm] = useState('create')
+  const [establishment, setEstablishment] = useState(INITIAL_VALUES);
+  const [errors, setErrors] = useState(INITIAL_VALUES);
+  const [modeForm, setModeForm] = useState("create");
 
   const handleSubmit = (e, refName) => {
-    e.preventDefault()
-    const [isValid, errors] = validateFields(establishment)
-    if (!isValid) setErrors(errors)
+    e.preventDefault();
+    const [isValid, errors] = validateFields(establishment);
+    if (!isValid) setErrors(errors);
     else {
-      if (modeForm === 'create') handleSave(establishment)
-      if (modeForm === 'update') handleUpdate(establishment.uuid, establishment)
-      clearFields()
-      clearErrors()
-      refName?.current.focus()
-      setModeForm('create')
+      if (modeForm === "create") handleSave(establishment);
+      if (modeForm === "update")
+        handleUpdate(establishment.uuid, establishment);
+      clearFields();
+      clearErrors();
+      refName?.current.focus();
+      setModeForm("create");
     }
-  }
+  };
 
   const handleSave = (establishment) => {
-    addEstablishment(establishment)
-    toast.success('Establecimiento guardado correctamente!')
-  }
+    addEstablishment(establishment);
+    toast.success("Establecimiento guardado correctamente!");
+  };
 
   const handleCancel = () => {
-    clearFields()
-    setModeForm('create')
-  }
+    clearFields();
+    setModeForm("create");
+  };
 
   const handleUpdate = (establishmentUuid, establishment) => {
-    updateEstablishment(establishmentUuid, establishment)
-    toast.success('Actualizado con exito!')
-  }
+    updateEstablishment(establishmentUuid, establishment);
+    toast.success("Actualizado con exito!");
+  };
 
   const handleDelete = (establishmentUuid) => {
-    deleteEstablishment(establishmentUuid)
-    toast.error('Eliminado')
-  }
+    deleteEstablishment(establishmentUuid);
+    toast.error("Eliminado");
+  };
 
   // Reset Fields
-  const clearFields = () => setEstablishment(INITIAL_VALUES)
-  const clearErrors = () => setErrors(INITIAL_VALUES)
+  const clearFields = () => setEstablishment(INITIAL_VALUES);
+  const clearErrors = () => setErrors(INITIAL_VALUES);
 
   const onClickEdit = (uuid) => {
-    const establishment = findEstablishment(uuid)
-    setEstablishment(establishment)
-    setModeForm('update')
-  }
+    const establishment = findEstablishment(uuid);
+    setEstablishment(establishment);
+    setModeForm("update");
+  };
 
   return (
     <div className={styles.body}>
@@ -85,16 +85,25 @@ export default function App() {
             establishment={establishment}
             handleSubmit={handleSubmit}
             errors={errors}
-            changeAddress={(e) => setEstablishment({ ...establishment, address: e.target.value })}
-            changeCity={(e) => setEstablishment({ ...establishment, city: e.target.value })}
-            changeName={(e) => setEstablishment({ ...establishment, name: e.target.value })}
+            changeAddress={(e) =>
+              setEstablishment({ ...establishment, address: e.target.value })
+            }
+            changeCity={(e) =>
+              setEstablishment({ ...establishment, city: e.target.value })
+            }
+            changeName={(e) =>
+              setEstablishment({ ...establishment, name: e.target.value })
+            }
             componentButtons={
               <>
-                <Button title={modeForm === 'create' ? 'Guardar' : 'Actualizar'} type='submit' />
                 <Button
-                  textColor='#000'
-                  backgroundColor='#fff'
-                  title='Cancelar'
+                  title={modeForm === "create" ? "Guardar" : "Actualizar"}
+                  type="submit"
+                />
+                <Button
+                  textColor="#000"
+                  backgroundColor="#fff"
+                  title="Cancelar"
                   onClick={handleCancel}
                 />
               </>
@@ -103,7 +112,7 @@ export default function App() {
         </div>
         <div>
           {establishments.length === 0 && <p>No hay establecimientos</p>}
-          {establishments.map(establishment => (
+          {establishments.map((establishment) => (
             <Establishment
               key={establishment.uuid}
               establishment={establishment}
@@ -113,9 +122,7 @@ export default function App() {
           ))}
         </div>
       </main>
-      <footer className={styles.footer}>
-
-      </footer>
+      <footer className={styles.footer}></footer>
     </div>
-  )
-} 
+  );
+}
