@@ -21,7 +21,8 @@ export default function App() {
     deleteEstablishment,
     updateEstablishment,
     findEstablishment,
-    establishments
+    establishments,
+    restoreDeletedEstablishments
   } = useCrud()
 
   const [establishment, setEstablishment] = useState(INITIAL_VALUES)
@@ -75,8 +76,8 @@ export default function App() {
   return (
     <div className={styles.body}>
       <header className={styles.header}>
-        <h1>Establicimientos sdfsdfsdfsdfsd</h1>
-        <p>Establecimientos registrados en lima</p>
+        <h1>Establecimientos</h1>
+        <p>Establecimientos registrados en Lima</p>
       </header>
       <main className={styles.main}>
         <div className={styles.containerForm}>
@@ -102,6 +103,7 @@ export default function App() {
           />
         </div>
         <div>
+          <button onClick={restoreDeletedEstablishments}>Restaurar</button>
           {establishments.length === 0 && <p>No hay establecimientos</p>}
           {establishments.map(establishment => (
             <Establishment

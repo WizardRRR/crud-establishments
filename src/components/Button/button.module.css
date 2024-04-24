@@ -1,5 +1,21 @@
-.button {
-  padding: 5px 20px;
+.button{
+  margin: 0 auto;
+  padding: 10px 20px;
   border-radius: 6px;
   box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.1);
+  transition: 0.5s ease-in;
+}
+
+.button:nth-child(1){
+  background-color: #f9b00a;
+}
+
+.button:nth-child(1):hover {
+  background: #010026;
+  color: white;
+}
+
+.button:nth-child(2):hover {
+  background: #010026;
+  color: white;
 }
