@@ -13,17 +13,21 @@ export default function Establihsment({
 
   return (
     <div className={styles.establishment}>
-      <p >{name}</p>
-      <p >{address}</p>
-      <p >{city}</p>
-      <p >{business}</p>
-      <Button onClick={() => handleDelete(uuid)} backgroundColor='red'>
-        <MdDeleteOutline size={20} />
-      </Button>
-      <Button onClick={() => onClickEdit(uuid)} backgroundColor='blue'>
-        <MdOutlineModeEdit size={20} />
-      </Button>
-    </div>
+        <div>
+        <p>{name}</p>
+        <p>{address}</p>
+        <p>{city}</p>
+        <p>{business}</p>
+        </div>
+        <div>
+        <Button onClick={() => handleDelete(uuid)} backgroundColor='red'>
+          <MdDeleteOutline size={20} />
+        </Button>
+        <Button onClick={() => onClickEdit(uuid)} backgroundColor='blue'>
+          <MdOutlineModeEdit size={20} />
+        </Button>
+        </div>
+      </div>
 
   )
 }

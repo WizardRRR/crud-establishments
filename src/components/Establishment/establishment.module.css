@@ -7,9 +7,9 @@
   gap: 1.5rem;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.233);
   border-radius: 9px;
-  min-width: 21rem;
-  max-width: 21rem;
-  min-height: 10rem;
+  min-width: 210px;
+  max-width: 400px;
+  min-height: 200px;
   padding: 15px;
 
 
