@@ -24,6 +24,7 @@ export default function Establihsment({
         <MdOutlineModeEdit size={20} />
       </Button>
     </div>
+
   )
 }
 

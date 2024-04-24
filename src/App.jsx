@@ -166,9 +166,9 @@ export default function App() {
             }
           />
         </div>
-        <div>
+        <div className={styles.containerList}>
           {establishments.length === 0 && <p>No hay establecimientos</p>}
-          {establishments.map((establishment) => (
+          {establishments.map(establishment => (
             <Establishment
               key={establishment.uuid}
               establishment={establishment}
