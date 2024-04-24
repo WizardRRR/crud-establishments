@@ -1,7 +1,7 @@
 import styles from "./app.module.css";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Form, Establishment, Business, Button, ButtonBusiness } from "./components";
+import { Form, FormBusines, Establishment, Business, Button, ButtonBusiness } from "./components";
 import validateEstablishmentFields from "./form-establishment.validate";
 import validateBusinessFields from "./form-business.validation";
 import useCrud from "./hooks/use-crud.hook";
@@ -147,9 +147,6 @@ export default function App() {
             changeName={(e) =>
               setEstablishment({ ...establishment, name: e.target.value })
             }
-            changeBusiness={(e) =>
-              setEstablishment({ ...establishment, business: e.target.value })
-            }
             componentButtons={
               <>
                 <Button
@@ -179,7 +176,7 @@ export default function App() {
         </div>
         <div className={styles.containerForm}>
           <h2>Negocios</h2>
-          <Form
+          <FormBusines
             business={business}
             handleSubmit={handleBusinessSubmit}
             errors={errors}
