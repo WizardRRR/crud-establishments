@@ -10,7 +10,7 @@ export default function Business({
 }) {
   const { uuid, name, address, city } = business;
 
-  return (
+  return (    
     <div className={styles.establishment}>
       <p>{name}</p>
       <p>{address}</p>

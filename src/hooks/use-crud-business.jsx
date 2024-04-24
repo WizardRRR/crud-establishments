@@ -2,54 +2,54 @@ import { useState } from "react";
 import createUUID from "../utils/generate-uuid";
 
 export default function useCrud() {
-  const [businesses, setBusinesses] = useState(() => {
-    const storedBusinesses = localStorage.getItem("businesses");
-    if (!storedBusinesses)
-      localStorage.setItem("businesses", JSON.stringify([]));
-    return storedBusinesses ? JSON.parse(storedBusinesses) : [];
+  const [business, setBusiness] = useState(() => {
+    const storedBusiness = localStorage.getItem("business");
+    if (!storedBusiness)
+      localStorage.setItem("business", JSON.stringify([]));
+    return storedBusiness ? JSON.parse(storedBusiness) : [];
   });
 
   // Operations CRUD
   const deleteBusiness = (uuid) => {
-    setBusinesses((prev) => {
-      const updatedBusinesses = prev.filter(
+    setBusiness((prev) => {
+      const updatedBusiness = prev.filter(
         (item) => item.uuid !== uuid
       );
-      localStorage.setItem("businesses", JSON.stringify(updatedBusinesses));
-      return updatedBusinesses;
+      localStorage.setItem("business", JSON.stringify(updatedBusiness));
+      return updatedBusiness;
     });
   };
 
   const addBusiness = (newBusiness) => {
-    setBusinesses((prev) => {
-      const updatedBusinesses = [
+    setBusiness((prev) => {
+      const updatedBusiness = [
         ...prev,
         { ...newBusiness, uuid: createUUID() },
       ];
-      localStorage.setItem("businesses", JSON.stringify(updatedBusinesses));
-      return updatedBusinesses;
+      localStorage.setItem("business", JSON.stringify(updatedBusiness));
+      return updatedBusiness;
     });
   };
 
   const updateBusiness = (uuid, updatedBusiness) => {
-    setBusinesses((prev) => {
-      const updatedBusinesses = prev.map((item) => {
-        if (item.uuid === uuid) {
-          return { ...item, ...updatedBusiness };
+    setBusiness((prev) => {
+      const businessUpdate = prev.map((business) => {
+        if (business.uuid === uuid) {
+          return { ...business, ...updatedBusiness };
         }
-        return item;
+        return business;
       });
-      localStorage.setItem("businesses", JSON.stringify(updatedBusinesses));
-      return updatedBusinesses;
+      localStorage.setItem("business", JSON.stringify(businessUpdate));
+      return businessUpdate;
     });
   };
 
   const findBusiness = (uuid) => {
-    return businesses.find((item) => item.uuid === uuid);
+    return business.find((item) => item.uuid === uuid);
   };
 
   return {
-    businesses,
+    business,
     deleteBusiness,
     addBusiness,
     updateBusiness,

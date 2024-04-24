@@ -1,0 +1,147 @@
+import styles from './form.module.css'
+import PropTypes from 'prop-types'
+import Field from '../Field'
+import Buton from '../ButtonBusiness'
+import { useRef } from 'react'
+import useCrudBusiness from '../../hooks/use-crud.hook'
+const INITIAL_BUSINESS_VALUES = {
+  name: "",
+  address: "",
+  city: "",
+};
+
+export default function FormBusiness({
+  handleSubmit,
+  handleCancel,
+  business,
+  errors,
+  changeName,
+  changeAddress,
+  changeCity,
+  componentButtons
+}) {
+  const {
+    addBusiness,
+    deleteBusiness,
+    updateBusiness,
+    findBusiness,
+    businesses,
+  } = useCrudBusiness();
+
+  const [business, setBusiness] = useState(INITIAL_BUSINESS_VALUES);
+  const [errorsBusiness, setErrorsBusiness] = useState(INITIAL_BUSINESS_VALUES);
+  const [businessModeForm, setBusinessModeForm] = useState("create");
+
+  const handleBusinessSubmit = (e, refName) => {
+    e.preventDefault();
+    const [isValid, errors] = validateBusinessFields(business);
+    if (!isValid) {
+      setErrorsBusiness(errors)
+    } else {
+      if (businessModeForm === "create") {
+        handleBusinessSave();
+      } else if (businessModeForm === "update") {
+        handleBusinessUpdate(business.uuid, business);
+      }
+      clearBusinessFields();
+      clearErrors();
+      refName?.current.focus();
+      setBusinessModeForm("create");
+    }
+  };
+
+  const clearErrors = () => setErrorsBusiness(INITIAL_BUSINESS_VALUES)
+
+  const handleBusinessSave = () => {
+    addBusiness(business);
+    toast.success("Negocio guardado correctamente!");
+  };
+
+  const handleBusinessUpdate = (uuid, business) => {
+    updateBusiness(uuid, business);
+    toast.success("Negocio actualizado con éxito!");
+  };
+
+  const handleBusinessDelete = (uuid) => {
+    deleteBusiness(uuid);
+    toast.error("Negocio eliminado");
+  };
+
+  const clearBusinessFields = () => setBusiness(INITIAL_BUSINESS_VALUES);
+
+  const handleBusinessEdit = (uuid) => {
+    const business = findBusiness(uuid);
+    setBusiness(business);
+    setBusinessModeForm("update");
+  };
+
+  const refName = useRef(null)
+  const onSubmit = (e) => {
+    handleSubmit(e, refName)
+  }
+
+  return (
+         <div style={{ display: 'flex' }}>
+          <div className={styles.containerForm}>
+            <h2>Negocios</h2>
+            <FormBusines
+              business={business}
+              handleSubmit={handleBusinessSubmit}
+              errors={errorsBusiness}
+              changeAddress={(e) => setBusiness({ ...business, address: e.target.value })}
+              changeCity={(e) =>
+                setBusiness({ ...business, city: e.target.value })
+              }
+              changeName={(e) =>
+                setBusiness({ ...business, name: e.target.value })
+              }
+              componentButtons={
+                <>
+                  <ButtonBusiness
+                    title={businessModeForm === "create" ? "Guardar" : "Actualizar"}
+                    type="submit"
+                  />
+                  <ButtonBusiness
+                    textColor="#000"
+                    backgroundColor="#fff"
+                    title="Cancelar"
+                    onClick={clearBusinessFields}
+                  />
+                </>
+              }
+            />
+          </div>
+          <div>
+            {businesses.length === 0 && <p>No hay negocios</p>}
+            {businesses.map((business) => (
+              <Business
+                key={business.uuid}
+                business={business}
+                handleDelete={() => handleBusinessDelete(business.uuid)}
+                onClickEdit={() => handleBusinessEdit(business.uuid)}
+              />
+            ))}
+          </div>
+        </div>
+  )
+}
+
+Form.propTypes = {
+  business: PropTypes.shape({
+    uuid: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired
+  }),
+  handleCancel: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  errors: PropTypes.shape({
+    name: PropTypes.string,
+    address: PropTypes.string,
+    city: PropTypes.string
+  }),
+  changeName: PropTypes.func,
+  changeAddress: PropTypes.func,
+  changeCity: PropTypes.func,
+  componentButtons: PropTypes.node
+}

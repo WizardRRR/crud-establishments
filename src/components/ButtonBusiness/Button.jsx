@@ -1,7 +1,7 @@
 import styles from './button.module.css'
 import PropTypes from 'prop-types'
 
-export default function Buton({
+export default function ButtonBusiness({
   title = 'default button',
   onClick,
   type = 'button',
@@ -22,7 +22,7 @@ export default function Buton({
   )
 }
 
-Buton.propTypes = {
+ButtonBusiness.propTypes = {
   title: PropTypes.string,
   onClick: PropTypes.func,
   type: PropTypes.string,
