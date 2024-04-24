@@ -101,10 +101,10 @@ export default function App() {
             }
           />
         </div>
-        <div>
+        <div className={styles.containerList}>
           {establishments.length === 0 && <p>No hay establecimientos</p>}
           {establishments.map(establishment => (
-            <Establishment
+            <Establishment 
               key={establishment.uuid}
               establishment={establishment}
               handleDelete={handleDelete}

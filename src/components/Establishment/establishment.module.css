@@ -1,3 +1,29 @@
-.establishment{
-  
-}
+.establishment {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem;
+  background-color: #f9b00a;
+  color: #ffff;
+  gap: 1.5rem;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.233);
+  border-radius: 9px;
+  min-width: 21rem;
+  max-width: 21rem;
+  min-height: 10rem;
+  padding: 15px;
+
+
+  & div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 5px;
+    overflow-wrap: break-word;
+    font-size: 17px;
+
+    & p:first-child {
+      font-size: 24px;
+      font-weight: 900;
+    }
+      }
+    }
