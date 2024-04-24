@@ -8,6 +8,7 @@ import validateFields from './form-establishment.validate'
 
 import useCrud from './use-crud.hook'
 
+
 const INITIAL_VALUES = {
   name: '',
   address: '',
@@ -16,13 +17,17 @@ const INITIAL_VALUES = {
 
 export default function App() {
 
+
   const {
     addEstablishment,
     deleteEstablishment,
     updateEstablishment,
     findEstablishment,
-    establishments
+    establishments,
+    restoreDeletedEstablishments
   } = useCrud()
+
+ 
 
   const [establishment, setEstablishment] = useState(INITIAL_VALUES)
   const [errors, setErrors] = useState(INITIAL_VALUES)
@@ -59,7 +64,7 @@ export default function App() {
 
   const handleDelete = (establishmentUuid) => {
     deleteEstablishment(establishmentUuid)
-    toast.error('Eliminado')
+    toast.error('Eliminado' )
   }
 
   // Reset Fields
@@ -72,11 +77,13 @@ export default function App() {
     setModeForm('update')
   }
 
+
+
   return (
     <div className={styles.body}>
       <header className={styles.header}>
-        <h1>Establecimientos</h1>
-        <p>Establecimientos registrados en Lima</p>
+        <h1>Establicimientos sdfsdfsdfsdfsd</h1>
+        <p>Establecimientos registrados en lima</p>
       </header>
       <main className={styles.main}>
         <div className={styles.containerForm}>
@@ -101,7 +108,10 @@ export default function App() {
             }
           />
         </div>
+        
         <div>
+          
+        <button onClick={restoreDeletedEstablishments}>Restaurar</button>
           {establishments.length === 0 && <p>No hay establecimientos</p>}
           {establishments.map(establishment => (
             <Establishment

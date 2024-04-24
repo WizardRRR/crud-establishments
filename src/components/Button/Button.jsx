@@ -5,12 +5,14 @@ export default function Buton({
   title = 'default button',
   onClick,
   type = 'button',
+  backgroundColor = 'var(--primary-color)',
+  textColor = 'var(--color-white)',
   children
 }) {
   return (
     <button
-      style={{}}
-      className={`${styles.button} flex`}
+      style={{ backgroundColor, color: textColor }}
+      className={`${styles.button} flex red`}
       type={type}
       onClick={onClick}
     >
@@ -24,5 +26,7 @@ Buton.propTypes = {
   title: PropTypes.string,
   onClick: PropTypes.func,
   type: PropTypes.string,
+  backgroundColor: PropTypes.string,
+  textColor: PropTypes.string,
   children: PropTypes.node
 }

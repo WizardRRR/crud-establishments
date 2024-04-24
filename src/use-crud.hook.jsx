@@ -10,13 +10,42 @@ export default function useCrud() {
   })
 
   // Operations CRUD
+
+
   const deleteEstablishment = (uuid) => {
     setEstablishments(prev => {
-      const updateEstablishment = prev.filter(establishment => establishment.uuid !== uuid)
-      localStorage.setItem('establishments', JSON.stringify(updateEstablishment))
-      return updateEstablishment
-    })
-  }
+
+      const updateEstablishment = prev.filter(establishment => establishment.uuid !== uuid);
+      
+
+      const establishmentsToRemove = prev.filter(establishment => establishment.uuid === uuid);
+      
+
+      const establishmentsFromStorage = JSON.parse(localStorage.getItem('establishments')) || [];
+      const updatedEstablishmentsFromStorage = establishmentsFromStorage.filter(establishment => establishment.uuid !== uuid);
+      localStorage.setItem('establishments', JSON.stringify(updatedEstablishmentsFromStorage));
+      
+
+      const deletedEstablishments = JSON.parse(localStorage.getItem('deletedEstablishments')) || [];
+      const newDeletedEstablishments = [...deletedEstablishments, ...establishmentsToRemove];
+      localStorage.setItem('deletedEstablishments', JSON.stringify(newDeletedEstablishments));
+      
+
+      return updateEstablishment;
+    });
+  };
+
+
+  const restoreDeletedEstablishments = () => {
+    const deletedEstablishments = JSON.parse(localStorage.getItem('deletedEstablishments')) || [];
+    setEstablishments(prev => [...prev, ...deletedEstablishments]);
+    localStorage.removeItem('deletedEstablishments'); 
+    return updateEstablishment;
+  };
+
+
+  
+  
 
   const addEstablishment = (establishment) => {
     setEstablishments(prev => {
@@ -49,5 +78,6 @@ export default function useCrud() {
     addEstablishment,
     updateEstablishment,
     findEstablishment,
+    restoreDeletedEstablishments
   }
 }
