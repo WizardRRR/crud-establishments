@@ -29,18 +29,19 @@ export default function useCrud() {
       const deletedEstablishments = JSON.parse(localStorage.getItem('deletedEstablishments')) || [];
       const newDeletedEstablishments = [...deletedEstablishments, ...establishmentsToRemove];
       localStorage.setItem('deletedEstablishments', JSON.stringify(newDeletedEstablishments));
-      
 
       return updateEstablishment;
-    });
-  };
+    })
+  }
 
 
   const restoreDeletedEstablishments = () => {
-    const deletedEstablishments = JSON.parse(localStorage.getItem('deletedEstablishments')) || [];
-    setEstablishments(prev => [...prev, ...deletedEstablishments]);
-    localStorage.removeItem('deletedEstablishments'); 
-    return updateEstablishment;
+    setEstablishments(prev => {
+      const deletedEstablishments = JSON.parse(localStorage.getItem('deletedEstablishments')) || [];
+      localStorage.setItem('establishments', JSON.stringify([...prev, ...deletedEstablishments]))
+      localStorage.removeItem('deletedEstablishments'); 
+      return [...prev, ...deletedEstablishments];
+    })
   };
 
 

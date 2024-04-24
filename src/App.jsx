@@ -33,6 +33,7 @@ export default function App() {
   const [errors, setErrors] = useState(INITIAL_VALUES)
   const [modeForm, setModeForm] = useState('create')
 
+  console.log(establishment)
   const handleSubmit = (e, refName) => {
     e.preventDefault()
     const [isValid, errors] = validateFields(establishment)
