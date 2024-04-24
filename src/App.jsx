@@ -177,6 +177,7 @@ export default function App() {
             />
           ))}
         </div>
+        
         <div className={styles.containerForm}>
           <h2>Negocios</h2>
           <FormBusines
