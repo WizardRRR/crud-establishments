@@ -75,8 +75,8 @@ export default function App() {
   return (
     <div className={styles.body}>
       <header className={styles.header}>
-        <h1>Establicimientos sdfsdfsdfsdfsd</h1>
-        <p>Establecimientos registrados en lima</p>
+        <h1>Establecimientos</h1>
+        <p>Establecimientos registrados en Lima</p>
       </header>
       <main className={styles.main}>
         <div className={styles.containerForm}>
