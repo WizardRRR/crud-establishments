@@ -147,6 +147,9 @@ export default function App() {
             changeName={(e) =>
               setEstablishment({ ...establishment, name: e.target.value })
             }
+            changeBusiness={(e) =>
+              setEstablishment({ ...establishment, business: e.target.value })
+            }
             componentButtons={
               <>
                 <Button
