@@ -22,6 +22,7 @@
 .header {
   align-self: center;
   text-align: center;
+
   & h1 {
     font-weight: var(--font-bold);
     font-size: var(--text-2xl);
@@ -36,4 +37,20 @@
 }
 
 .footer {
+}
+
+.containerList {
+  max-height: 400px;
+  overflow-y: scroll;
+  padding: 0px 15px;
+}
+
+.containerList::-webkit-scrollbar-thumb {
+  width: 12px;
+  border-radius: 5px;
+  background-color: rgb(255, 166, 0);
+}
+
+.containerList::-webkit-scrollbar {
+  width: 12px;
 }
