@@ -1,7 +1,7 @@
 import { useState } from "react";
 import createUUID from "../utils/generate-uuid";
 
-export default function useCrud() {
+export default function useCrudBusiness() {
   const [establishments, setEstablishments] = useState(() => {
     const storedEstablishments = localStorage.getItem("establishments");
     if (!storedEstablishments)

@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-
 import styles from './establishment.module.css'
 import Button from '../Button'
 
@@ -10,13 +9,14 @@ export default function Establihsment({
   onClickEdit
 }) {
 
-  const { uuid, name, address, city } = establishment
+  const { uuid, name, address, city, business} = establishment
 
   return (
     <div className={styles.establishment}>
       <p >{name}</p>
       <p >{address}</p>
       <p >{city}</p>
+      <p >{business}</p>
       <Button onClick={() => handleDelete(uuid)} backgroundColor='red'>
         <MdDeleteOutline size={20} />
       </Button>
@@ -32,7 +32,8 @@ Establihsment.propTypes = {
     uuid: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     address: PropTypes.string.isRequired,
-    city: PropTypes.string.isRequired
+    city: PropTypes.string.isRequired,
+    business: PropTypes.string.isRequired
   }).isRequired,
   handleDelete: PropTypes.func.isRequired,
   onClickEdit: PropTypes.func.isRequired
