@@ -1,4 +1,4 @@
-const validateFields = (establishment) => {
+const validateFieldsBusiness = (establishment) => {
   let errors = {}
   let isValid = true
 
@@ -14,7 +14,11 @@ const validateFields = (establishment) => {
     isValid = false
     errors.city = 'La ciudad es obligatoria'
   }
+  if (establishment.business.trim() === '') {
+    isValid = false
+    errors.business = 'El negocio es obligatoria'
+  }
   return [isValid, errors]
 }
 
-export default validateFields
+export default validateFieldsBusiness
