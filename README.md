@@ -1,8 +1,12 @@
-# React + Vite
+# Crud Negocios&Establecimientos
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto implementa un sistema CRUD (Crear, Leer, Actualizar, Eliminar) para administrar negocios y sus establecimientos, utilizando React y Vite como herramientas de desarrollo.
 
-Currently, two official plugins are available:
+## Tecnologías
+- React
+- Vite
+- Bun
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Colaboradores
+
+[![Contribuidores](https://contrib.rocks/image?repo=wizardrrr/crud-establishments)](https://github.com/wizardrrr/crud-establishments/graphs/contributors)
