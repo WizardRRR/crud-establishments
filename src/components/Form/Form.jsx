@@ -13,9 +13,8 @@ export default function Form({
   changeAddress,
   changeCity,
   changeBusiness,
-  componentButtons
+  componentButtons,
 }) {
-
   const refName = useRef(null)
   const onSubmit = (e) => {
     handleSubmit(e, refName)
@@ -45,7 +44,7 @@ export default function Form({
         onChange={changeCity}
         error={errors?.city}
       />
-        <Field
+      <Field
         label='Negocio'
         type='text'
         value={establishment?.business}
@@ -53,18 +52,19 @@ export default function Form({
         error={errors?.business}
       />
       <div className={styles.containerButtons}>
-        {
-          componentButtons ? componentButtons :
-            <>
-              <Buton title='Añadir' type='submit' />
-              <Buton
-                textColor='#000'
-                backgroundColor='#fff'
-                title='Cancelar'
-                onClick={handleCancel}
-              />
-            </>
-        }
+        {componentButtons ? (
+          componentButtons
+        ) : (
+          <>
+            <Buton title='Añadir' type='submit' />
+            <Buton
+              textColor='#000'
+              backgroundColor='#fff'
+              title='Cancelar'
+              onClick={handleCancel}
+            />
+          </>
+        )}
       </div>
     </form>
   )
@@ -76,7 +76,7 @@ Form.propTypes = {
     name: PropTypes.string.isRequired,
     address: PropTypes.string.isRequired,
     city: PropTypes.string.isRequired,
-    business: PropTypes.string.isRequired
+    business: PropTypes.string.isRequired,
   }),
   handleCancel: PropTypes.func,
   handleSubmit: PropTypes.func,
@@ -84,11 +84,11 @@ Form.propTypes = {
     name: PropTypes.string,
     address: PropTypes.string,
     city: PropTypes.string,
-    business: PropTypes.string
+    business: PropTypes.string,
   }),
   changeName: PropTypes.func,
   changeAddress: PropTypes.func,
   changeCity: PropTypes.func,
   changeBusiness: PropTypes.func,
-  componentButtons: PropTypes.node
+  componentButtons: PropTypes.node,
 }

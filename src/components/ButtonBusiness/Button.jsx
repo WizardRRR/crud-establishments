@@ -7,7 +7,7 @@ export default function ButtonBusiness({
   type = 'button',
   backgroundColor = 'var(--primary-color)',
   textColor = 'var(--color-white)',
-  children
+  children,
 }) {
   return (
     <button
@@ -28,5 +28,5 @@ ButtonBusiness.propTypes = {
   type: PropTypes.string,
   backgroundColor: PropTypes.string,
   textColor: PropTypes.string,
-  children: PropTypes.node
+  children: PropTypes.node,
 }

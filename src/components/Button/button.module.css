@@ -1,4 +1,4 @@
-.button{
+.button {
   margin: 0 auto;
   padding: 10px 20px;
   border-radius: 6px;
@@ -6,7 +6,7 @@
   transition: 0.5s ease-in;
 }
 
-.button:nth-child(1){
+.button:nth-child(1) {
   background-color: #f9b00a;
 }
 

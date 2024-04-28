@@ -1,16 +1,12 @@
-import PropTypes from 'prop-types';
-import styles from './business.module.css';
-import Button from '../ButtonBusiness';
-import { MdDeleteOutline, MdOutlineModeEdit } from 'react-icons/md';
+import PropTypes from 'prop-types'
+import styles from './business.module.css'
+import Button from '../ButtonBusiness'
+import { MdDeleteOutline, MdOutlineModeEdit } from 'react-icons/md'
 
-export default function Business({
-  business,
-  handleDelete,
-  onClickEdit
-}) {
-  const { uuid, name, address, city } = business;
+export default function Business({ business, handleDelete, onClickEdit }) {
+  const { uuid, name, address, city } = business
 
-  return (    
+  return (
     <div className={styles.establishment}>
       <p>{name}</p>
       <p>{address}</p>
@@ -22,7 +18,7 @@ export default function Business({
         <MdOutlineModeEdit size={20} />
       </Button>
     </div>
-  );
+  )
 }
 
 Business.propTypes = {
@@ -33,5 +29,5 @@ Business.propTypes = {
     city: PropTypes.string.isRequired,
   }).isRequired,
   handleDelete: PropTypes.func.isRequired,
-  onClickEdit: PropTypes.func.isRequired
-};
+  onClickEdit: PropTypes.func.isRequired,
+}
